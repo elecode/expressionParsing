@@ -18,16 +18,17 @@ class PostfixEvaluator
 
     public function evaluate(Expression $expression)
     {
-        $stackOfOperands = array();
-        foreach ($expression->getSequence() as $element) {
-            if ($element instanceof Operand) {
-                array_push($stackOfOperands, $element);
-            } else if ($element instanceof Operator) {
-                $otherNumber = array_pop($stackOfOperands);
-                $oneNumber = array_pop($stackOfOperands);
-                array_push($stackOfOperands, Parser::parseSymbol($element->operate($oneNumber, $otherNumber)));
+        $operands = new Stack();
+        foreach ($expression->getSequence() as $symbol) {
+            if ($symbol instanceof Operand) {
+                $operands->push($symbol);
+            } else if ($symbol instanceof Operator) {
+                $secondOperand = $operands->pop();
+                $firstOperand = $operands->pop();
+                $result = $symbol->operate($firstOperand, $secondOperand);
+                $operands->push(Parser::parseSymbol($result));
             }
         }
-        return array_pop($stackOfOperands);
+        return $operands->pop();
     }
 }
