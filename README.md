@@ -1,6 +1,6 @@
 # Expression Parsing
 
-This is sample implementation of Expression Parsing exercise (http://elecode.com/2015/03/21/practice-exercise-expression-parsing.html)
+This is sample implementation of Expression Parsing exercise (http://arturas.smorgun.com/2015/03/21/practice-exercise-expression-parsing.html)
 
 Requires PHP 5.5
 
